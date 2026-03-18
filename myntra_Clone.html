@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myntra</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;overflow-x:hidden}
+:root{
+  --r:#E8001D;--p:#FF4D79;--pl:#FFB3C6;
+  --w:#FFF5F7;--dk:#1A0008;
+  --serif:'Cormorant Garamond',serif;
+  --sans:'Syne',sans-serif;
+}
+body{font-family:var(--sans);background:var(--w);color:var(--dk)}
+
+/* NAV */
+nav{width:100%;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:var(--w);border-bottom:1px solid rgba(232,0,29,0.12);position:sticky;top:0;z-index:100}
+.logo{font-family:var(--serif);font-size:1.9rem;font-weight:700;color:var(--r);text-decoration:none;letter-spacing:-0.5px}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--dk);transition:color 0.2s}
+.nav-links a:hover{color:var(--r)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.icon-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;border-radius:50%;border:1.5px solid transparent;transition:border-color 0.2s}
+.icon-btn:hover{border-color:var(--r)}
+.cart-wrap{position:relative}
+.cart-badge{position:absolute;top:-3px;right:-3px;width:15px;height:15px;background:var(--r);color:#fff;font-size:0.52rem;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.signin{font-family:var(--sans);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:9px 22px;background:var(--r);color:#fff;border:none;cursor:pointer;transition:background 0.2s}
+.signin:hover{background:var(--dk)}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:54% 46%;height:calc(100vh - 62px);min-height:500px;max-height:800px}
+.hero-l{background:var(--dk);display:flex;flex-direction:column;justify-content:center;padding:64px 56px}
+.hero-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--p);margin-bottom:24px;display:flex;align-items:center;gap:8px}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--p)}
+.hero-h1{font-family:var(--serif);font-size:clamp(3.5rem,6vw,6.5rem);font-weight:300;line-height:0.95;color:#fff;letter-spacing:-2px;margin-bottom:28px}
+.hero-h1 strong{font-weight:700;color:var(--r);display:block}
+.hero-h1 em{font-style:italic;color:var(--pl)}
+.hero-sub{font-size:0.85rem;line-height:1.8;color:rgba(255,245,247,0.5);max-width:320px;margin-bottom:40px}
+.hero-btns{display:flex;gap:12px}
+.btn-main{font-family:var(--sans);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:14px 36px;background:var(--r);color:#fff;border:none;cursor:pointer;transition:background 0.2s,transform 0.2s}
+.btn-main:hover{background:var(--p);transform:translateY(-1px)}
+.btn-ghost{font-family:var(--sans);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:13px 32px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2);cursor:pointer;transition:border-color 0.2s}
+.btn-ghost:hover{border-color:#fff}
+.hero-stats{display:flex;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08)}
+.stat{flex:1;padding-right:20px;border-right:1px solid rgba(255,255,255,0.08)}
+.stat:last-child{border-right:none;padding-left:20px;padding-right:0}
+.stat-n{font-family:var(--serif);font-size:2.5rem;font-weight:700;color:#fff;line-height:1}
+.stat-n span{font-size:1.1rem;color:var(--p)}
+.stat-l{font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,245,247,0.35);margin-top:3px}
+.hero-r{background:linear-gradient(150deg,#fff5f7,#ffd6e0,#ffb3c2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-r-letter{position:absolute;font-family:var(--serif);font-size:38vw;font-weight:700;color:rgba(232,0,29,0.05);line-height:1;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;white-space:nowrap}
+.hero-fig{position:relative;z-index:2}
+.float-tag{position:absolute;background:#fff;padding:12px 16px;box-shadow:0 12px 36px rgba(232,0,29,0.15);display:flex;align-items:center;gap:10px;z-index:5}
+.ft1{top:60px;right:20px;animation:flt 3s ease-in-out infinite}
+.ft2{bottom:80px;left:10px;animation:flt 3s 1s ease-in-out infinite}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.ft-icon{font-size:1.2rem}
+.ft-t{font-size:0.7rem;font-weight:700;color:var(--dk)}
+.ft-s{font-size:0.58rem;color:#aaa}
+.ft-pill{background:var(--r);color:#fff;font-size:0.58rem;font-weight:800;padding:3px 8px;border-radius:20px}
+
+/* TICKER */
+.ticker{background:var(--r);padding:11px 0;overflow:hidden;width:100%}
+.ticker-track{display:flex;white-space:nowrap;animation:tick 22s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{font-size:0.66rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#fff;padding:0 24px}
+.ticker-dot{color:rgba(255,255,255,0.4)}
+
+/* SECTION */
+.sec{padding:64px 48px;width:100%}
+.sec-label{font-size:0.62rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--r);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(232,0,29,0.15)}
+.sec-title{font-family:var(--serif);font-size:clamp(2rem,3vw,3rem);font-weight:300;line-height:1.05;margin-bottom:36px;letter-spacing:-1px}
+.sec-title em{font-style:italic;color:var(--r)}
+
+/* CATEGORIES */
+.cats-sec{background:#fff}
+.cats-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.cat{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:2/3;transition:transform 0.35s}
+.cat:hover{transform:scale(1.03)}
+.cat:hover .cat-face{transform:scale(1.06)}
+.cat:hover .cat-veil{opacity:0.88}
+.cat:hover .cat-cta{opacity:1;transform:translateY(0)}
+.cat-face{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform 0.45s}
+.cw{background:linear-gradient(150deg,#ffd6e0,#ffb3c6,#ff8fad)}
+.cm{background:linear-gradient(150deg,#ffdde6,#ffc2cf,#ff9db3)}
+.ck{background:linear-gradient(150deg,#ffe8ee,#ffd0db,#ffb3c2)}
+.cb{background:linear-gradient(150deg,#ff8fad,#ff6b8a,#e8001d)}
+.ch{background:linear-gradient(150deg,#ffc2cf,#ffb3c2,#ff8fad)}
+.cs{background:linear-gradient(150deg,#e8001d,#c0001a,#900015)}
+.cat-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,0,8,0.78) 0%,transparent 60%);opacity:0.5;transition:opacity 0.35s}
+.cat-info{position:absolute;bottom:0;left:0;right:0;padding:16px 14px}
+.cat-name{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:2px}
+.cat-count{font-size:0.58rem;color:rgba(255,255,255,0.55);letter-spacing:0.1em;text-transform:uppercase}
+.cat-cta{display:inline-block;font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:var(--r);color:#fff;padding:4px 10px;margin-top:6px;opacity:0;transform:translateY(6px);transition:all 0.3s}
+
+/* DEALS */
+.deals-sec{background:var(--dk)}
+.deals-sec .sec-label{color:var(--p)}
+.deals-sec .sec-label::after{background:rgba(255,77,121,0.2)}
+.deals-sec .sec-title{color:#fff}
+.bento{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:220px 220px;gap:10px}
+.bcard{position:relative;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,0.07);transition:border-color 0.3s,transform 0.25s}
+.bcard:hover{border-color:var(--r);transform:scale(1.01)}
+.bcard.tall{grid-row:1/3}
+.bcard-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.bg1{background:linear-gradient(135deg,#1f0009,#4a0018)}
+.bg2{background:linear-gradient(135deg,#1a0008,#350012)}
+.bg3{background:linear-gradient(135deg,#0d0004,#2a0010)}
+.bg4{background:linear-gradient(135deg,#200008,#450015)}
+.bcard-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;background:linear-gradient(to top,rgba(10,0,3,0.88) 0%,transparent 55%)}
+.bcard-tag{display:inline-block;font-size:0.56rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;background:var(--r);color:#fff;padding:3px 8px;margin-bottom:8px;width:fit-content}
+.bcard-name{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:#fff;line-height:1.1;margin-bottom:5px}
+.bcard.tall .bcard-name{font-size:1.9rem}
+.bcard-price{font-size:0.72rem;color:rgba(255,200,210,0.65)}
+.bcard-price b{color:var(--pl);font-size:0.9rem}
+.disc{position:absolute;top:12px;right:12px;width:44px;height:44px;background:var(--r);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.disc-n{font-size:0.7rem;font-weight:800;color:#fff;line-height:1}
+.disc-o{font-size:0.4rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.8)}
+
+/* TRENDING */
+.trend-sec{background:var(--w)}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pcard{cursor:pointer;transition:transform 0.3s}
+.pcard:hover{transform:translateY(-5px)}
+.pcard:hover .pthumb{box-shadow:0 18px 40px rgba(232,0,29,0.16)}
+.pcard:hover .pwish{opacity:1}
+.pthumb{width:100%;aspect-ratio:3/4;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:12px;transition:box-shadow 0.3s}
+.pt1{background:linear-gradient(140deg,#ffe8ee,#ffd0db)}
+.pt2{background:linear-gradient(140deg,#ffd6e0,#ffc2cf)}
+.pt3{background:linear-gradient(140deg,#ffccd9,#ffb3c2)}
+.pt4{background:linear-gradient(140deg,#ffb3c2,#ff9db3)}
+.pwish{position:absolute;top:10px;right:10px;width:28px;height:28px;background:#fff;border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;cursor:pointer;opacity:0;transition:opacity 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.pwish.on{opacity:1;color:var(--r)}
+.pbadge{position:absolute;top:10px;left:10px;font-size:0.56rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;background:var(--r);color:#fff;padding:3px 7px}
+.pbrand{font-size:0.76rem;font-weight:700;color:var(--dk);margin-bottom:2px}
+.pname{font-size:0.7rem;color:#aaa;margin-bottom:7px}
+.prow{display:flex;align-items:baseline;gap:7px}
+.pprice{font-size:0.88rem;font-weight:700;color:var(--dk)}
+.pmrp{font-size:0.7rem;color:#bbb;text-decoration:line-through}
+.poff{font-size:0.66rem;font-weight:700;color:var(--r)}
+.pstars{font-size:0.62rem;color:#f4c842;margin-bottom:3px}
+
+/* BRANDS */
+.brands-sec{background:#fff;border-top:1px solid rgba(232,0,29,0.08);border-bottom:3px solid var(--r)}
+.brands-wrap{overflow:hidden;position:relative}
+.brands-wrap::before,.brands-wrap::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+.brands-wrap::before{left:0;background:linear-gradient(to right,#fff,transparent)}
+.brands-wrap::after{right:0;background:linear-gradient(to left,#fff,transparent)}
+.brands-track{display:flex;animation:btick 24s linear infinite}
+@keyframes btick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.brand-item{flex-shrink:0;padding:22px 38px;font-family:var(--serif);font-size:1.3rem;font-weight:700;color:rgba(26,0,8,0.16);cursor:pointer;transition:color 0.25s;white-space:nowrap;border-right:1px solid rgba(232,0,29,0.07)}
+.brand-item:hover{color:var(--r)}
+
+/* REVEAL */
+.sr{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.sr.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:0.08s}.d2{transition-delay:0.16s}.d3{transition-delay:0.24s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">myntra</a>
+  <ul class="nav-links">
+    <li><a href="#">Men</a></li>
+    <li><a href="#">Women</a></li>
+    <li><a href="#">Kids</a></li>
+    <li><a href="#">Beauty</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Studio</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="icon-btn">🔍</div>
+    <div class="icon-btn">♡</div>
+    <div class="icon-btn cart-wrap">🛍️<span class="cart-badge">3</span></div>
+    <button class="signin">Sign In</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-l">
+    <div class="hero-eyebrow">SS 2026 Collection</div>
+    <h1 class="hero-h1">Your<br><strong>Style.</strong><br><em>Amplified.</em></h1>
+    <p class="hero-sub">India's most-loved fashion destination. Thousands of brands, millions of looks — curated for the way you live.</p>
+    <div class="hero-btns">
+      <button class="btn-main">Shop the Edit</button>
+      <button class="btn-ghost">See Lookbook</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">5<span>K+</span></div><div class="stat-l">Brands</div></div>
+      <div class="stat"><div class="stat-n">80<span>%</span></div><div class="stat-l">Max Off</div></div>
+      <div class="stat"><div class="stat-n">30<span>D</span></div><div class="stat-l">Returns</div></div>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hero-r-letter">M</div>
+    <div class="hero-fig">
+      <svg viewBox="0 0 260 400" width="210" fill="none" style="filter:drop-shadow(0 20px 36px rgba(232,0,29,0.18))">
+        <ellipse cx="130" cy="52" rx="30" ry="34" fill="rgba(232,0,29,0.12)" stroke="rgba(232,0,29,0.28)" stroke-width="1.5"/>
+        <circle cx="130" cy="50" r="21" fill="rgba(255,180,195,0.4)"/>
+        <rect x="121" y="82" width="18" height="16" rx="3" fill="rgba(255,180,195,0.3)"/>
+        <path d="M82 100 Q62 122 58 188 Q52 260 56 370 H204 Q208 260 202 188 Q198 122 178 100 Q160 90 130 88 Q100 90 82 100Z" fill="rgba(232,0,29,0.13)" stroke="rgba(232,0,29,0.3)" stroke-width="1.5"/>
+        <rect x="66" y="178" width="128" height="16" rx="2" fill="rgba(232,0,29,0.22)" stroke="rgba(232,0,29,0.45)" stroke-width="1"/>
+        <path d="M82 100 Q56 120 44 158 Q40 172 48 177 Q57 180 63 168 Q68 148 80 135" fill="rgba(232,0,29,0.08)" stroke="rgba(232,0,29,0.2)" stroke-width="1.5"/>
+        <path d="M178 100 Q204 120 216 158 Q220 172 212 177 Q203 180 197 168 Q192 148 180 135" fill="rgba(232,0,29,0.08)" stroke="rgba(232,0,29,0.2)" stroke-width="1.5"/>
+        <path d="M60 230 Q130 218 200 230" stroke="rgba(232,0,29,0.18)" stroke-width="1" fill="none"/>
+        <path d="M56 300 Q130 288 204 300" stroke="rgba(232,0,29,0.12)" stroke-width="1" fill="none"/>
+        <path d="M180 195 Q202 190 208 208 Q212 224 202 231 Q188 236 180 224 Q175 210 180 195Z" fill="rgba(232,0,29,0.18)" stroke="rgba(232,0,29,0.45)" stroke-width="1.5"/>
+        <path d="M102 44 Q96 18 118 10 Q130 6 142 10 Q164 18 158 44" fill="rgba(26,0,8,0.22)" stroke="rgba(26,0,8,0.28)" stroke-width="1"/>
+        <circle cx="44" cy="225" r="5" fill="rgba(232,0,29,0.18)"/>
+        <circle cx="218" cy="280" r="6" fill="rgba(232,0,29,0.14)"/>
+      </svg>
+    </div>
+    <div class="float-tag ft1">
+      <div class="ft-icon">⚡</div>
+      <div><div class="ft-t">Flash Sale Live</div><div class="ft-s">Ends in 3h 42m</div></div>
+      <div class="ft-pill">80% OFF</div>
+    </div>
+    <div class="float-tag ft2">
+      <div class="ft-icon">🚀</div>
+      <div><div class="ft-t">Free Delivery</div><div class="ft-s">Above ₹499</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">End of Season Sale</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">Free Returns 30 Days</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">5,000+ Brands</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">New Arrivals Every Day</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">Myntra Insider Rewards</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">No Cost EMI Available</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">End of Season Sale</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">Free Returns 30 Days</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">5,000+ Brands</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">New Arrivals Every Day</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">Myntra Insider Rewards</span><span class="ticker-dot"> ✦ </span>
+    <span class="ticker-item">No Cost EMI Available</span><span class="ticker-dot"> ✦ </span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="sec cats-sec sr">
+  <div class="sec-label">Browse</div>
+  <div class="sec-title">Shop by <em>Category</em></div>
+  <div class="cats-grid">
+    <div class="cat d1 sr"><div class="cat-face cw"><svg viewBox="0 0 90 120" width="50" fill="none"><ellipse cx="45" cy="22" rx="15" ry="17" fill="rgba(232,0,29,0.18)"/><path d="M20 44 Q12 72 14 108 H76 Q78 72 70 44 Q58 36 45 34 Q32 36 20 44Z" fill="rgba(232,0,29,0.15)" stroke="rgba(232,0,29,0.3)" stroke-width="1.5"/></svg></div><div class="cat-veil"></div><div class="cat-info"><div class="cat-name">Women</div><div class="cat-count">1.2M+ Styles</div><span class="cat-cta">Explore →</span></div></div>
+    <div class="cat d1 sr"><div class="cat-face cm"><svg viewBox="0 0 90 120" width="50" fill="none"><circle cx="45" cy="21" r="15" fill="rgba(232,0,29,0.15)"/><path d="M18 42 L22 108 H68 L72 42 Q58 34 45 32 Q32 34 18 42Z" fill="rgba(232,0,29,0.13)" stroke="rgba(232,0,29,0.28)" stroke-width="1.5"/><line x1="45" y1="42" x2="45" y2="108" stroke="rgba(232,0,29,0.25)" stroke-width="1"/></svg></div><div class="cat-veil"></div><div class="cat-info"><div class="cat-name">Men</div><div class="cat-count">800K+ Styles</div><span class="cat-cta">Explore →</span></div></div>
+    <div class="cat d2 sr"><div class="cat-face ck"><svg viewBox="0 0 90 120" width="50" fill="none"><circle cx="45" cy="22" r="13" fill="rgba(232,0,29,0.13)"/><path d="M22 44 Q15 70 17 106 H73 Q75 70 68 44 Q56 37 45 35 Q34 37 22 44Z" fill="rgba(232,0,29,0.11)" stroke="rgba(232,0,29,0.24)" stroke-width="1.5"/></svg></div><div class="cat-veil"></div><div class="cat-info"><div class="cat-name">Kids</div><div class="cat-count">400K+ Styles</div><span class="cat-cta">Explore →</span></div></div>
+    <div class="cat d2 sr"><div class="cat-face cb"><svg viewBox="0 0 90 120" width="50" fill="none"><rect x="24" y="36" width="42" height="60" rx="4" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/><rect x="34" y="27" width="22" height="12" rx="2" fill="rgba(255,255,255,0.22)"/><circle cx="45" cy="68" r="11" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.38)" stroke-width="1"/></svg></div><div class="cat-veil"></div><div class="cat-info"><div class="cat-name">Beauty</div><div class="cat-count">200K+ Products</div><span class="cat-cta">Explore →</span></div></div>
+    <div class="cat d3 sr"><div class="cat-face ch"><svg viewBox="0 0 90 120" width="50" fill="none"><path d="M12 64 L45 30 L78 64 L78 108 H12Z" fill="rgba(232,0,29,0.16)" stroke="rgba(232,0,29,0.32)" stroke-width="1.5"/><rect x="34" y="80" width="22" height="28" fill="rgba(232,0,29,0.18)"/></svg></div><div class="cat-veil"></div><div class="cat-info"><div class="cat-name">Home</div><div class="cat-count">150K+ Products</div><span class="cat-cta">Explore →</span></div></div>
+    <div class="cat d3 sr"><div class="cat-face cs"><svg viewBox="0 0 90 120" width="50" fill="none"><circle cx="45" cy="60" r="26" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/><path d="M45 34 L48 50 L66 50 L52 60 L58 78 L45 67 L32 78 L38 60 L24 50 L42 50Z" fill="rgba(255,255,255,0.22)"/></svg></div><div class="cat-veil"></div><div class="cat-info"><div class="cat-name">Studio</div><div class="cat-count">Curated Looks</div><span class="cat-cta">Explore →</span></div></div>
+  </div>
+</section>
+
+<!-- DEALS -->
+<section class="sec deals-sec sr">
+  <div class="sec-label">Hot Deals</div>
+  <div class="sec-title">Deals of <em>the Day</em></div>
+  <div class="bento">
+    <div class="bcard tall"><div class="bcard-bg bg1" style="height:100%"><svg viewBox="0 0 180 300" width="120" fill="none"><ellipse cx="90" cy="44" rx="26" ry="28" fill="rgba(232,0,29,0.14)"/><path d="M44 80 Q30 118 32 260 H148 Q150 118 136 80 Q118 68 90 66 Q62 68 44 80Z" fill="rgba(232,0,29,0.1)" stroke="rgba(232,0,29,0.22)" stroke-width="1.5"/></svg></div><div class="disc"><div class="disc-n">70%</div><div class="disc-o">OFF</div></div><div class="bcard-body"><span class="bcard-tag">Women's Edit</span><div class="bcard-name">Ethnic &<br>Fusion Wear</div><div class="bcard-price">From <b>₹399</b></div></div></div>
+    <div class="bcard"><div class="bcard-bg bg2" style="height:100%"><svg viewBox="0 0 130 110" width="85" fill="none"><ellipse cx="65" cy="70" rx="38" ry="26" fill="rgba(232,0,29,0.13)"/><path d="M36 52 Q65 26 94 52 L100 70 Q65 84 30 70Z" fill="rgba(232,0,29,0.13)" stroke="rgba(232,0,29,0.28)" stroke-width="1"/><rect x="48" y="22" width="34" height="32" rx="3" fill="rgba(232,0,29,0.1)" stroke="rgba(232,0,29,0.28)" stroke-width="1.5"/></svg></div><div class="disc"><div class="disc-n">60%</div><div class="disc-o">OFF</div></div><div class="bcard-body"><span class="bcard-tag">Accessories</span><div class="bcard-name">Bags & Wallets</div><div class="bcard-price">From <b>₹299</b></div></div></div>
+    <div class="bcard"><div class="bcard-bg bg3" style="height:100%"><svg viewBox="0 0 130 100" width="85" fill="none"><ellipse cx="65" cy="58" rx="35" ry="24" fill="rgba(232,0,29,0.1)"/><circle cx="65" cy="56" r="14" fill="rgba(232,0,29,0.14)" stroke="rgba(232,0,29,0.28)" stroke-width="1.5"/><path d="M65 32 L65 24M65 80 L65 88M32 56 L24 56M98 56 L106 56" stroke="rgba(232,0,29,0.28)" stroke-width="1.8"/></svg></div><div class="disc"><div class="disc-n">50%</div><div class="disc-o">OFF</div></div><div class="bcard-body"><span class="bcard-tag">Premium</span><div class="bcard-name">Watches</div><div class="bcard-price">From <b>₹1,499</b></div></div></div>
+    <div class="bcard"><div class="bcard-bg bg4" style="height:100%"><svg viewBox="0 0 130 110" width="85" fill="none"><rect x="18" y="28" width="94" height="64" rx="7" fill="rgba(232,0,29,0.1)" stroke="rgba(232,0,29,0.24)" stroke-width="1.5"/><path d="M32 28 Q42 12 65 10 Q88 12 98 28" stroke="rgba(232,0,29,0.32)" stroke-width="1.5" fill="none"/><circle cx="65" cy="62" r="13" fill="rgba(232,0,29,0.14)" stroke="rgba(232,0,29,0.28)" stroke-width="1"/></svg></div><div class="disc"><div class="disc-n">55%</div><div class="disc-o">OFF</div></div><div class="bcard-body"><span class="bcard-tag">Footwear</span><div class="bcard-name">Sneakers</div><div class="bcard-price">From <b>₹699</b></div></div></div>
+  </div>
+</section>
+
+<!-- TRENDING -->
+<section class="sec trend-sec sr">
+  <div class="sec-label">What's Hot</div>
+  <div class="sec-title">Trending <em>Right Now</em></div>
+  <div class="products">
+    <div class="pcard d1 sr"><div class="pthumb pt1"><svg viewBox="0 0 100 135" width="65" fill="none"><ellipse cx="50" cy="23" rx="15" ry="16" fill="rgba(232,0,29,0.16)"/><path d="M23 46 Q15 74 17 120 H83 Q85 74 77 46 Q64 38 50 36 Q36 38 23 46Z" fill="rgba(232,0,29,0.13)" stroke="rgba(232,0,29,0.27)" stroke-width="1.5"/></svg><button class="pwish">♡</button><span class="pbadge">40% OFF</span></div><div class="pstars">★★★★★</div><div class="pbrand">H&M</div><div class="pname">Floral Wrap Dress</div><div class="prow"><span class="pprice">₹1,499</span><span class="pmrp">₹2,499</span><span class="poff">40% off</span></div></div>
+    <div class="pcard d1 sr"><div class="pthumb pt2"><svg viewBox="0 0 100 135" width="65" fill="none"><circle cx="50" cy="22" r="14" fill="rgba(232,0,29,0.13)"/><path d="M21 44 L25 118 H75 L79 44 Q65 36 50 34 Q35 36 21 44Z" fill="rgba(232,0,29,0.11)" stroke="rgba(232,0,29,0.23)" stroke-width="1.5"/><line x1="50" y1="44" x2="50" y2="118" stroke="rgba(232,0,29,0.18)" stroke-width="1"/></svg><button class="pwish on">♥</button><span class="pbadge">SALE</span></div><div class="pstars">★★★★☆</div><div class="pbrand">Roadster</div><div class="pname">Slim Fit Shirt</div><div class="prow"><span class="pprice">₹799</span><span class="pmrp">₹1,299</span><span class="poff">38% off</span></div></div>
+    <div class="pcard d2 sr"><div class="pthumb pt3"><svg viewBox="0 0 100 110" width="65" fill="none"><ellipse cx="50" cy="62" rx="30" ry="22" fill="rgba(232,0,29,0.11)"/><path d="M27 48 Q50 27 73 48 L78 62 Q50 74 22 62Z" fill="rgba(232,0,29,0.13)" stroke="rgba(232,0,29,0.25)" stroke-width="1"/><rect x="35" y="18" width="30" height="30" rx="2" fill="rgba(232,0,29,0.1)" stroke="rgba(232,0,29,0.28)" stroke-width="1.5"/></svg><button class="pwish">♡</button></div><div class="pstars">★★★★★</div><div class="pbrand">Lavie</div><div class="pname">Structured Tote</div><div class="prow"><span class="pprice">₹1,199</span><span class="pmrp">₹2,999</span><span class="poff">60% off</span></div></div>
+    <div class="pcard d3 sr"><div class="pthumb pt4"><svg viewBox="0 0 100 135" width="65" fill="none"><ellipse cx="50" cy="23" rx="14" ry="16" fill="rgba(232,0,29,0.16)"/><path d="M23 46 Q15 74 17 120 H83 Q85 74 77 46 Q64 38 50 36 Q36 38 23 46Z" fill="rgba(232,0,29,0.16)" stroke="rgba(232,0,29,0.28)" stroke-width="1.5"/></svg><button class="pwish">♡</button><span class="pbadge">NEW</span></div><div class="pstars">★★★★☆</div><div class="pbrand">W</div><div class="pname">Embroidered Kurta Set</div><div class="prow"><span class="pprice">₹1,899</span><span class="pmrp">₹2,799</span><span class="poff">32% off</span></div></div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="sec brands-sec sr" style="padding-top:44px;padding-bottom:44px">
+  <div class="sec-label">Trusted By</div>
+  <div class="sec-title" style="margin-bottom:24px">Top <em>Brands</em></div>
+  <div class="brands-wrap">
+    <div class="brands-track">
+      <span class="brand-item">H&M</span><span class="brand-item">Zara</span><span class="brand-item">Nike</span><span class="brand-item">Adidas</span><span class="brand-item">Levi's</span><span class="brand-item">Puma</span><span class="brand-item">Mango</span><span class="brand-item">Biba</span><span class="brand-item">W</span><span class="brand-item">boAt</span><span class="brand-item">Fabindia</span><span class="brand-item">Nykaa</span>
+      <span class="brand-item">H&M</span><span class="brand-item">Zara</span><span class="brand-item">Nike</span><span class="brand-item">Adidas</span><span class="brand-item">Levi's</span><span class="brand-item">Puma</span><span class="brand-item">Mango</span><span class="brand-item">Biba</span><span class="brand-item">W</span><span class="brand-item">boAt</span><span class="brand-item">Fabindia</span><span class="brand-item">Nykaa</span>
+    </div>
+  </div>
+</section>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') });
+}, {threshold: 0.1});
+document.querySelectorAll('.sr').forEach(el => obs.observe(el));
+
+document.querySelectorAll('.pwish').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    btn.classList.toggle('on');
+    btn.textContent = btn.classList.contains('on') ? '♥' : '♡';
+    btn.style.color = btn.classList.contains('on') ? 'var(--r)' : '';
+  });
+});
+</script>
+</body>
+</html>
